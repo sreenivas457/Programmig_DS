@@ -17,7 +17,6 @@ import com.ds.commandresponsebuilder.CommandBuilder;
 public class Rules {
 	private StringBuilder output;
 	private Map<String, Set<Integer>> mandatoryClothingMap;
-	
 
 	/** Construct a new Rules
 	 * 	Initializes members
@@ -65,7 +64,7 @@ public class Rules {
 		boolean done = false;
 		int commandNumber = 8;
 		
-		/**
+		/*
 		 * We scan input list and check if the first command is 8 corresponding to the 
 		 * business rule of "Removing PJs" first  
 		 */
@@ -77,7 +76,7 @@ public class Rules {
 			output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
 		}
 		
-		/**
+		/*
 		 * Our method of application of rules
 		 * 
 		 * If first input is correct, we move on to process the remaining inputs, one at a time.
@@ -121,6 +120,11 @@ public class Rules {
 							done = true;
 						}
 						break;
+						
+				/*
+				 * Jumping to case 5, As case 4 and case 6 have same logic, grouping them together  
+				 */
+						
 				case 5: if(!tempType.equals("HOT") && clothing.contains(4)){
 							clothing.add(commandNumber);
 							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
@@ -129,6 +133,11 @@ public class Rules {
 							done = true;
 						}
 						break;
+						
+					/*
+					 * same logic, so grouped to avoid duplication	
+					 */
+						
 				case 4:
 				case 6:	clothing.add(commandNumber);
 						output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType) +", ");
