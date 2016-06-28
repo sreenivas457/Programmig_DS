@@ -3,7 +3,9 @@ To run unit tests, Junit library should be included (If you are using latest Jun
 ##Source
 The source code has following classes. 
 ###Response
-This class stores response and corresponding description. Response is mapped to temperature type. To store this mapping, We use Map as these are <Key, Value> pairs and HashMap, so that lookup is O(1).
+This class stores response and corresponding description. Response is mapped to temperature type. To store this mapping, We use Map as these are <Key, Value> pairs and HashMap, so that lookup is O(1). Response is taken as object to ensure encapsulation of map and description. 
+
+With HashMap, We can extend this to any number of temperature types.
 ###CommandBuilder
 CommandBuilder class maps command number to the corresponding response object.  Each command number has a response object associated to it. Again, we use a HashMap, for mapping and lookup.
 ###ReadInput
