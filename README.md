@@ -27,6 +27,9 @@ Test classes are provided for Response, CommandBuilder and Rules Classes. Respon
 RulesTest Class contains basic tests covering a range of possible commands covering business rules. Each test is named in such a way that test case name conveys the actual test it is performing. With unit test cases, it becomes easy to make changes without breaking existing logic.
 
 #Run Executable
+
+Copy ds_tempadvise_data.csv from the input folder and place it in the same folder as jar.
+
 To run executable jar, 
 
 java -jar Programming_DS.jar RunProgram
