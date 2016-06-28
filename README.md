@@ -28,8 +28,8 @@ RulesTest Class contains basic tests covering a range of possible commands cover
 
 #Run Executable
 
-Copy ds_tempadvise_data.csv from the input folder and place it in the same folder as jar.
-
-To run executable jar, 
+Unzip Programming_DS, To run executable jar
 
 java -jar Programming_DS.jar RunProgram
+
+To run test cases and program, import project from Programming_DS_Eclipse.zip into eclipse.
