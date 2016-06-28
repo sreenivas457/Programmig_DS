@@ -36,12 +36,5 @@ public class ResponseTest {
 		assertEquals("sandals", response.getResponse("HOT"));
 		assertEquals("boots", response.getResponse("COLD"));
 	}
-	
-	/**
-	 * tests response class for description
-	 */
-	@Test
-	public void testDescription(){
-		assertEquals("Put on footwear", response.getDescription());
-	}
+
 }
