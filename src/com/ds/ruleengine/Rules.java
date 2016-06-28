@@ -89,34 +89,46 @@ public class Rules {
 		
 		for(int i = 1; i<input.size()&&!done;i++){
 			commandNumber = input.get(i); 
+			/*
+			 * checking if a duplicate command was issued before, fails if a duplicate is found
+			 */
 			if(clothing.contains(commandNumber)){
 				output.append("fail");
 				return output.toString();
 			}
 			switch(commandNumber){
+						/*
+						 * To Put on footwear, Either temperature should be HOT or Pants and Pants should be worn (COLD check is ignored as not HOT => COLD
+						 */
 				case 1: if (tempType.equals("HOT") || (clothing.contains(6) && clothing.contains(3))){
 							clothing.add(commandNumber);
-							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
+							appendToOutput(commandBuilder, commandNumber, tempType);
 						}else{
-							output.append("fail");
+							appendFailToOutput();
 							done = true;
 						}
 						break;
-	
+						
+						/*
+						 * To Put on headwear, shirt must be put on earlier
+						 */
 				case 2: if(clothing.contains(4)){
 							clothing.add(commandNumber);
-							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
+							appendToOutput(commandBuilder, commandNumber, tempType);
 						}else{
-							output.append("fail");
+							appendFailToOutput();
 							done = true;
 						}
 						break;
 					
+						/*
+						 * We cannot put on socks, if temperature is HOT 
+						 */
 				case 3: if(!tempType.equals("HOT")){
 							clothing.add(commandNumber);
-							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
+							appendToOutput(commandBuilder, commandNumber, tempType);
 						}else{
-							output.append("fail");
+							appendFailToOutput();
 							done = true;
 						}
 						break;
@@ -124,34 +136,39 @@ public class Rules {
 				/*
 				 * Jumping to case 5, As case 4 and case 6 have same logic, grouping them together  
 				 */
+						/*
+						 * To Put on Jacket, Temperature should  not be Hot and Shirt should be put on first
+						 */
 						
 				case 5: if(!tempType.equals("HOT") && clothing.contains(4)){
 							clothing.add(commandNumber);
-							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
+							appendToOutput(commandBuilder, commandNumber, tempType);
 						}else{
-							output.append("fail");
+							appendFailToOutput();
 							done = true;
 						}
 						break;
 						
 					/*
 					 * same logic, so grouped to avoid duplication	
+					 *
+					 * To Put on shirt or pant, no pre-conditions, except Removing PJs which is already applied
 					 */
 						
 				case 4:
 				case 6:	clothing.add(commandNumber);
-						output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType) +", ");
+						appendToOutput(commandBuilder, commandNumber, tempType);
 						break;
 
 				case 7: if(checkClothing(clothing , tempType)){
-							output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType));
+							appendToOutput(commandBuilder, commandNumber, tempType);
 						}else{
-							output.append("fail");
+							appendFailToOutput();
 						}
 						done = true;
 						break;
 						
-				default:output.append("fail");
+				default:appendFailToOutput();
 						done = true;
 						break;
 				}		
@@ -174,5 +191,31 @@ public class Rules {
 	private boolean checkClothing(Set<Integer> clothing, String tempType){
 		Set<Integer> mandatoryClothingSet =  mandatoryClothingMap.get(tempType);
 		return clothing.equals(mandatoryClothingSet);
+	}
+	
+	/**
+	 * Appends corresponding response to output string
+	 * 
+	 * @param commandBuilder
+	 * 			Command Builder with commands and corresponding responses
+	 * @param tempType
+	 * 			temperature type "HOT" / "COLD"
+	 * @param commandNumber
+	 * 			current command number whose response is to be retrieved
+	 * 
+	 */
+	private void appendToOutput(CommandBuilder commandBuilder, int commandNumber, String tempType){
+		if(commandNumber == 7){
+			output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType));
+		}else{
+			output.append(commandBuilder.retrieveResponse(commandNumber).getResponse(tempType)+", ");
+		}
+	}
+	
+	/**
+	 * Appends fail to output String
+	 */
+	private void appendFailToOutput(){
+		output.append("fail");
 	}
 }

@@ -8,10 +8,17 @@ import org.junit.Test;
 import com.ds.commandresponsebuilder.CommandBuilder;
 import com.ds.commandresponsebuilder.Response;
 
+/**
+ * CommandBuilderTest class to CommandBilder Class
+ * @author sreenivas
+ */
 public class CommandBuilderTest {
 	private Response response;
 	private CommandBuilder cb;
-	
+
+	/**
+	 * sets up basic information required to test CommandBuilders command<->Response Map
+	 */
 	@Before
 	public void setup() {
 		response = new Response();
@@ -19,11 +26,14 @@ public class CommandBuilderTest {
 		response.buildResponse("HOT", "sandals");
 		response.buildResponse("COLD", "boots");
 		response.setDescription("Put on footwear");
-		cb.addCommand(1, response);
 	}
 	
+	/**
+	 * Tests the CommandBuilder class for command<->Response Map
+	 */
 	@Test
-	public void testAddCommand() {
+	public void testAddandRetrieveCommand() {
+		cb.addCommand(1, response);
 		Response resultResponse = cb.retrieveResponse(1);
 		assertEquals("Put on footwear", resultResponse.getDescription());
 		assertEquals("sandals", resultResponse.getResponse("HOT"));
