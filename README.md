@@ -13,7 +13,7 @@ CommandBuilder class maps command number to the corresponding response object.  
 ###ReadInput
 ReadInput class reads input from a file and builds commands from it. This generates a CommandBuilder object from input file. Input file is expected to be in a specific format.
 
-**To avoid hardcoding and ensure easy extendibility,input is read from a file, To add a new temperature type or command we just need to add it to the input file. 
+**To avoid hardcoding and ensure easy extendibility, input is read from a file, To add a new temperature type or command we just need to add it to the input file. 
 
 ###Rules
 Rules class contains all the business login for our system. It applies rules on input by cross checking them with command builder and generating output based on given business rules. applyRules method which is the core component of our ruleengine starts with a check for initial command of RemovingPJs. It then process input commands one at a time by storing previously executed commands in a set ( so that no clothing is duplicated). Since no duplicates, Set data structure is chosen. HashSet to ensure O(1) lookup. The same set is used to see if all the mandatory clothing is worn before leaving the house.
