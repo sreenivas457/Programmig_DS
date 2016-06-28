@@ -29,4 +29,4 @@ RulesTest Class contains basic tests covering a range of possible commands cover
 #Run Executable
 To run executable jar, 
 
-java -jar Programming_DS.jar RunProgram ds_tempadvise_data.csv
+java -jar Programming_DS.jar RunProgram
